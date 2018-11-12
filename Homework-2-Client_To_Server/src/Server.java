@@ -4,19 +4,33 @@ public class Server
 {
     public static void main(String args[])
     { 
+        // Boolean Used to stop the sever
+        boolean keepGoing = true;
+
+        //String used to get client message
+        String clientMessage;
+
         DatagramSocket aSocket = null;
+
+        System.out.println("\nServer Starting...... Started!");
         try
         {
             aSocket = new DatagramSocket(6789);
-            while(true)
+            while(keepGoing)
             {
                 byte[] buffer = new byte[1000];
                 DatagramPacket request = new DatagramPacket(buffer, buffer.length);
+                System.out.print("\n\nWaiting for message....");
                 aSocket.receive(request);
-                System.out.println("Testing");
                 buffer = request.getData();
                 DatagramPacket reply = new DatagramPacket(request.getData(), request.getLength(), request.getAddress(), request.getPort());
-                System.out.println(new String(buffer, 0, request.getLength()));
+                clientMessage = new String(buffer, 0, request.getLength());
+                System.out.print("\n\tMessage From Client: " + clientMessage);
+                if (clientMessage.equalsIgnoreCase("quit"))
+                {
+                    keepGoing = false;
+                    System.out.print("\n\tQuitting..... GOODBYE!!\n");
+                }
                 aSocket.send(reply);
             }
         }

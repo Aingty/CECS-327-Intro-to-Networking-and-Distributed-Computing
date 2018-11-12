@@ -9,6 +9,10 @@ public class Client
         // args give message contents and server hostname
         DatagramSocket aSocket = null;
         byte[] buffer;
+
+        // Declaring Server port
+        int serverPort = 6789;
+
         // Scanner for user's input
         Scanner input = new Scanner(System.in);
 
@@ -21,7 +25,7 @@ public class Client
         String userMessage="";
         String serverReply;
 
-        System.out.println("Welcome to the UDP Client Program!!");
+        System.out.println("\nWelcome to the UDP Client Program!!");
         while (keepGoing)
         {
             if (!ipProvided)
@@ -48,7 +52,7 @@ public class Client
                         }
                         else
                         {
-                            System.out.println("You have entered an Invalid IP Address!!!!");
+                            System.out.println("\nYou have entered an Invalid IP Address!!!!\n");
                             ipProvided = false;
                             break;
                         }
@@ -65,16 +69,16 @@ public class Client
             }
             try 
             {
-                aSocket = new DatagramSocket();
-                byte [] m = userMessage.getBytes();
+                System.out.print("\n");
                 System.out.print("\tEnter a message to Host (or quit): ");
                 userMessage = input.nextLine();
+                aSocket = new DatagramSocket();
+                byte [] m = userMessage.getBytes();
                 if (userMessage.equalsIgnoreCase("quit"))
                 {
                     keepGoing = false;
                 }
                 InetAddress aHost = InetAddress.getByName(hostIP);
-                int serverPort = 6789;
                 DatagramPacket request = new DatagramPacket(m,  m.length, aHost, serverPort);
                 aSocket.send(request);
                 buffer = new byte[1000];
@@ -82,7 +86,7 @@ public class Client
                 aSocket.receive(reply);
                 buffer = reply.getData();
                 serverReply = new String(buffer, 0, reply.getLength());
-                System.out.println("Reply from Server: " + serverReply);
+                System.out.println("\t\tEcho from Server: " + serverReply);
             }
             catch (SocketException e)
             {
