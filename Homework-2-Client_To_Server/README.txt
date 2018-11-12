@@ -8,13 +8,13 @@ Prerequisites:
 
 Compiling the Program:
     How to COMPILE (Window):
-        1. Extract the "Client_To_Server.zip" into a Folder of your choice.
+        1. Extract the "Client_To_Server.zip(or .rar)" into a Folder of your choice.
         2. Launch Window CMD
         3. "cd" into the Folder.
         4. To Compile the files do the following:
             "javac -d \class\ src\*.java"
     How to COMPILE (Linux/Mac):
-        1. Extract the "Client_To_Server.zip" into a Folder of your choice.
+        1. Extract the "Client_To_Server.zip(or .rar)" into a Folder of your choice.
         2. Launch Bash Terminal
         3. "cd" into the Folder.
         4. To Compile the files do the following:
@@ -31,4 +31,3 @@ Running the Program:
     6. Run the Client Program:
         "java Client" (W/out ".class")
     7. Follow the Client Program Prompt
-    
