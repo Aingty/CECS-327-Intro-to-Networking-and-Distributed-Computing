@@ -8,12 +8,16 @@ public class Server
         try
         {
             aSocket = new DatagramSocket(6789);
-            byte[] buffer = new byte[1000];
             while(true)
             {
+                byte[] buffer = new byte[1000];
                 DatagramPacket request = new DatagramPacket(buffer, buffer.length);
                 aSocket.receive(request);
-                DatagramPacket reply = new DatagramPacket(request.getData(), request.getLength(), request.getAddress(), request.getPort());aSocket.send(reply);
+                System.out.println("Testing");
+                buffer = request.getData();
+                DatagramPacket reply = new DatagramPacket(request.getData(), request.getLength(), request.getAddress(), request.getPort());
+                System.out.println(new String(buffer, 0, request.getLength()));
+                aSocket.send(reply);
             }
         }
         catch (SocketException e)
