@@ -25,7 +25,7 @@ Running the Program:
     1. "cd" into the Folder of "Client_To_Server".
     2. "cd" into the "class" folder.
     3. Run the Server Program:
-        "java Server" (W/out ".class")
+        "java Server [port]" (W/out ".class")
     4. Open another CMD/Terminal for Client Program
     5. "cd" into the same "class" folder.
     6. Run the Client Program:
