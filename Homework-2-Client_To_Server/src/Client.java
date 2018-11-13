@@ -10,8 +10,6 @@ public class Client
         DatagramSocket aSocket = null;
         byte[] buffer;
 
-        // Declaring Server port
-        int serverPort = 6789;
 
         // Scanner for user's input
         Scanner input = new Scanner(System.in);
@@ -19,9 +17,11 @@ public class Client
         // Booleans used to test different functionality through out the code
         boolean keepGoing = true; // Check to keep the whole program running
         boolean ipProvided = false; // Check if valid ip already provided
+        boolean portProvided = false; // Check if port ip was correct
 
         // Strings used in the program
         String hostIP=""; // Will become the user's inputted host ip address
+        String serverPort=""; // Declaring Server port
         String userMessage="";
         String serverReply;
 
@@ -63,7 +63,23 @@ public class Client
                     hostIP = hostIP.toLowerCase();
                 }
             }
-            if (!ipProvided)
+            if (!portProvided)
+            {
+                System.out.print("\tPlease provide Host Port Number: ");
+                serverPort = input.nextLine();
+
+                // Checking to see if port number is parsable into integer
+                try
+                {
+                    Integer.parseInt(serverPort);
+                    portProvided = true;
+                }
+                catch (NumberFormatException e)
+                {
+                    portProvided = false;
+                }
+            }
+            if (!ipProvided || !portProvided)
             {
                 continue;
             }
@@ -79,7 +95,7 @@ public class Client
                     keepGoing = false;
                 }
                 InetAddress aHost = InetAddress.getByName(hostIP);
-                DatagramPacket request = new DatagramPacket(m,  m.length, aHost, serverPort);
+                DatagramPacket request = new DatagramPacket(m,  m.length, aHost, Integer.parseInt(serverPort));
                 aSocket.send(request);
                 buffer = new byte[1000];
                 DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
