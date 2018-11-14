@@ -63,7 +63,7 @@ public class Client
                     hostIP = hostIP.toLowerCase();
                 }
             }
-            if (!portProvided)
+            if (!portProvided && ipProvided)
             {
                 System.out.print("\tPlease provide Host Port Number: ");
                 serverPort = input.nextLine();
@@ -77,8 +77,11 @@ public class Client
                 catch (NumberFormatException e)
                 {
                     portProvided = false;
+                    System.out.println("\nYou have entered an Invalid Port Number!!!!\n");
                 }
             }
+            
+            // Program keeps going without establishing connection due to invalid ip or port
             if (!ipProvided || !portProvided)
             {
                 continue;
